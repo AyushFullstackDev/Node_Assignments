@@ -42,4 +42,8 @@ const markStaffAttendance = async (attendance_session_id, staff_id, status) => {
   return res.rows[0];
 };
 
-module.exports = { markStudentAttendance, markTeacherAttendance, markStaffAttendance };
+module.exports = { 
+  markStudentAttendance, 
+  markTeacherAttendance, 
+  markStaffAttendance 
+};

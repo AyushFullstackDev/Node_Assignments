@@ -18,7 +18,10 @@ app.use('/api/attendance', attendanceRoutes);
 
 // 404 handler
 app.use((req, res) => {
-  res.status(404).json({ success: false, message: 'Route not found' });
+  res.status(404).json({ 
+    success: false, 
+    message: 'Route not found' 
+  });
 });
 
 app.listen(3000, () => console.log('Server running on port 3000'));

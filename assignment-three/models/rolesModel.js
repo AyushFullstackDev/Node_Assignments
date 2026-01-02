@@ -36,4 +36,10 @@ const deleteRole = async (id) => {
   return { message: 'Role deleted successfully' };
 };
 
-module.exports = { createRole, getRoles, getRoleById, updateRole, deleteRole };
+module.exports = { 
+  createRole, 
+  getRoles, 
+  getRoleById, 
+  updateRole, 
+  deleteRole 
+};

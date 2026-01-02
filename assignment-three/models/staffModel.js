@@ -40,4 +40,10 @@ const deleteStaff = async (id) => {
   return { message: 'Staff deleted successfully' };
 };
 
-module.exports = { createStaff, getStaff, getStaffById, updateStaff, deleteStaff };
+module.exports = { 
+  createStaff, 
+  getStaff, 
+  getStaffById, 
+  updateStaff, 
+  deleteStaff 
+};
