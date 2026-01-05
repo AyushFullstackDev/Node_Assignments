@@ -9,3 +9,4 @@ router.put('/:id', teachersController.updateTeacher);
 router.delete('/:id', teachersController.deleteTeacher);
 
 module.exports = router;
+

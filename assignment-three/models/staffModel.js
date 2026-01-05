@@ -1,49 +1,52 @@
-// models/staffModel.js
-// DB queries for staff
-
 const pool = require('../database');
+const queries = require('../queries/queries');
 
-// Create staff
+// Create Staff
 const createStaff = async (name, institute_id, role_id) => {
   const res = await pool.query(
-    `INSERT INTO staff (name, institute_id, role_id)
-     VALUES ($1, $2, $3) RETURNING *`,
+    queries.staff.create,
     [name, institute_id, role_id]
   );
   return res.rows[0];
 };
 
-// Get all staff
+// Get all Staff
 const getStaff = async () => {
-  const res = await pool.query('SELECT * FROM staff ORDER BY id ASC');
+  const res = await pool.query(queries.staff.getAll);
   return res.rows;
 };
 
-// Get staff by ID
+// Get Staff by ID
 const getStaffById = async (id) => {
-  const res = await pool.query('SELECT * FROM staff WHERE id=$1', [id]);
+  const res = await pool.query(
+    queries.staff.getById,
+    [id]
+  );
   return res.rows[0];
 };
 
-// Update staff
+// Update Staff
 const updateStaff = async (id, name, institute_id, role_id) => {
   const res = await pool.query(
-    `UPDATE staff SET name=$1, institute_id=$2, role_id=$3 WHERE id=$4 RETURNING *`,
+    queries.staff.update,
     [name, institute_id, role_id, id]
   );
   return res.rows[0];
 };
 
-// Delete staff
+// Delete Staff
 const deleteStaff = async (id) => {
-  await pool.query('DELETE FROM staff WHERE id=$1', [id]);
+  await pool.query(
+    queries.staff.delete,
+    [id]
+  );
   return { message: 'Staff deleted successfully' };
 };
 
-module.exports = { 
-  createStaff, 
-  getStaff, 
-  getStaffById, 
-  updateStaff, 
-  deleteStaff 
+module.exports = {
+  createStaff,
+  getStaff,
+  getStaffById,
+  updateStaff,
+  deleteStaff
 };

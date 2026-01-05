@@ -1,45 +1,54 @@
 const pool = require('../database');
+const queries = require('../queries/queries');
 
-// Create role
+// Create Role
 const createRole = async (name) => {
   const res = await pool.query(
-    'INSERT INTO roles (name) VALUES ($1) RETURNING *',
+    queries.roles.create,
     [name]
   );
   return res.rows[0];
 };
 
-// Get all roles
+// Get all Roles
 const getRoles = async () => {
-  const res = await pool.query('SELECT * FROM roles');
+  const res = await pool.query(
+    queries.roles.getAll
+  );
   return res.rows;
 };
 
-// Get role by ID
+// Get Role by ID
 const getRoleById = async (id) => {
-  const res = await pool.query('SELECT * FROM roles WHERE id=$1', [id]);
+  const res = await pool.query(
+    queries.roles.getById,
+    [id]
+  );
   return res.rows[0];
 };
 
-// Update role
+// Update Role
 const updateRole = async (id, name) => {
   const res = await pool.query(
-    'UPDATE roles SET name=$1 WHERE id=$2 RETURNING *',
+    queries.roles.update,
     [name, id]
   );
   return res.rows[0];
 };
 
-// Delete role
+// Delete Role
 const deleteRole = async (id) => {
-  await pool.query('DELETE FROM roles WHERE id=$1', [id]);
+  await pool.query(
+    queries.roles.delete,
+    [id]
+  );
   return { message: 'Role deleted successfully' };
 };
 
-module.exports = { 
-  createRole, 
-  getRoles, 
-  getRoleById, 
-  updateRole, 
-  deleteRole 
+module.exports = {
+  createRole,
+  getRoles,
+  getRoleById,
+  updateRole,
+  deleteRole
 };

@@ -5,11 +5,11 @@ const { Pool } = require('pg');
 
 // Update these values with your PostgreSQL config
 const pool = new Pool({
-  user: 'postgres',          // DB username
-  host: 'localhost',         // DB host
-  database: 'SchoolCoreAPI', // DB name
-  password: 'postgres',      // DB password
-  port: 5432,
+    user: 'postgres',      // DB username
+    host: 'localhost', // DB host
+    database: 'SchoolCoreAPI', // DB name
+    password: 'postgres', // DB password
+    port: 5432,
 });
 
 pool.on('connect', () => {
