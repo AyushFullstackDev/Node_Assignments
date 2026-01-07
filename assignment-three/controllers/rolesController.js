@@ -1,6 +1,10 @@
 const rolesService = require('../services/rolesService');
 
 const createRole = async (req, res) => {
+  // Validation for match column
+  if(!req.body.name) {
+    return res.status(400).json({ success: false, message: 'name is required' });
+  }
   try {
     const result = await rolesService.create(req.body.name);
     res.status(201).json({ success: true, data: result });

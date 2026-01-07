@@ -1,6 +1,10 @@
 const staffService = require('../services/staffService');
 
 const createStaff = async (req, res) => {
+  // Validation 
+  if(!req.body.name || !req.body.institute_id || !req.body.role_id) {
+    return res.status(400).json({ success: false, message: 'All fields are required' });
+  }
   const { name, institute_id, role_id } = req.body;
   const result = await staffService.create(name, institute_id, role_id);
   res.status(201).json({ success: true, data: result });

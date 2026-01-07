@@ -1,10 +1,10 @@
 const attendanceService = require('../services/attendanceService');
 
-// Mark Student Attendance
-const validStatuses = ['present', 'absent', 'late'];
-
 const markStudentAttendance = async (req, res) => {
   const { attendance_session_id, student_id, status } = req.body;
+  if (!attendance_session_id || !student_id || !status) {
+    return res.status(400).json({ success: false, message: 'attendance_session_id, student_id, and status are required' });
+  }
   try {
     const result = await attendanceService.markStudent({ attendance_session_id, student_id, status });
     res.json({ success: true, data: result });
@@ -16,11 +16,14 @@ const markStudentAttendance = async (req, res) => {
 
 // Get Student Attendance
 
-const getStudentAttendance = async()=> attendanceService.getStudentAttendance();
+const getStudentAttendance = async () => attendanceService.getStudentAttendance();
 
 
 // Mark Teacher Attendance
 const markTeacherAttendance = async (req, res) => {
+  if (!req.body.attendance_session_id || !req.body.teacher_id || !req.body.status) {
+    return res.status(400).json({ success: false, message: 'attendance_session_id, teacher_id, and status are required' });
+  }
   try {
     const { attendance_session_id, teacher_id, status } = req.body;
     const result = await attendanceService.markTeacher({ attendance_session_id, teacher_id, status });
@@ -32,6 +35,9 @@ const markTeacherAttendance = async (req, res) => {
 
 // Mark Staff Attendance
 const markStaffAttendance = async (req, res) => {
+  if (!req.body.attendance_session_id || !req.body.staff_id || !req.body.status) {
+    return res.status(400).json({ success: false, message: 'attendance_session_id, staff_id, and status are required' });
+  }
   try {
     const { attendance_session_id, staff_id, status } = req.body;
     const result = await attendanceService.markStaff({ attendance_session_id, staff_id, status });

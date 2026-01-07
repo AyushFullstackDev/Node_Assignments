@@ -1,6 +1,10 @@
 const subjectsService = require('../services/subjectsService');
 
 const createSubject = async (req, res) => {
+  // Validation
+  if(!req.body.name) {
+    return res.status(400).json({ success: false, message: 'name is required' });
+  }
   try {
     const result = await subjectsService.create(req.body.name);
     res.status(201).json({ success: true, data: result });
